@@ -12,7 +12,17 @@ const createBook = async (payload: TBooks) => {
   const result = await Book.create(payload);
   return result;
 };
+const getAllBooks = async () => {
+  const result = await Book.find({});
+  return result;
+};
+const getSingleBook = async (id: string) => {
+  const result = await Book.findById(id);
+  return result;
+};
 
 export const BookService = {
   createBook,
+  getAllBooks,
+  getSingleBook,
 };
