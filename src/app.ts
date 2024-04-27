@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import { AuthRoutes } from "./app/modules/auth/auth.routes";
+import { bookRoutes } from "./app/modules/book/book.routes";
 import { userRoutes } from "./app/modules/user/user.routes";
 import globalErrorHandler from "./middlewares/globalErrorHandler";
 import notFound from "./middlewares/notFound";
@@ -16,6 +17,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auth", AuthRoutes);
+app.use("/api/v1/book", bookRoutes);
 
 //global error handler
 app.use(globalErrorHandler);
