@@ -20,9 +20,20 @@ const getSingleBook = async (id: string) => {
   const result = await Book.findById(id);
   return result;
 };
+const updateBook = async (id: string, payload: Partial<TBooks>) => {
+  const isBooksExists = await Book.findById(id);
+  if (!isBooksExists) {
+    throw new AppError(httpStatus.NOT_FOUND, "Books not found");
+  }
+  const result = await Book.findByIdAndUpdate(id, payload, {
+    new: true,
+  });
+  return result;
+};
 
 export const BookService = {
   createBook,
   getAllBooks,
   getSingleBook,
+  updateBook,
 };
