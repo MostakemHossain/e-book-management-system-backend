@@ -18,6 +18,11 @@ router.post(
 );
 router.get("/", BookController.getAllBook);
 router.get("/:id", BookController.getSingleBook);
-router.patch("/:id", BookController.updateBook);
+router.patch(
+  "/:id",
+  validateRequest(BookValidation.updateBookValidationSchema),
+  BookController.updateBook
+);
+router.delete("/:id", BookController.deleteBook);
 
 export const bookRoutes = router;

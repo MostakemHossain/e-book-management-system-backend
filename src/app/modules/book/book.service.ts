@@ -17,6 +17,10 @@ const getAllBooks = async () => {
   return result;
 };
 const getSingleBook = async (id: string) => {
+  const isBooksExists = await Book.findById(id);
+  if (!isBooksExists) {
+    throw new AppError(httpStatus.NOT_FOUND, "Books not found");
+  }
   const result = await Book.findById(id);
   return result;
 };
@@ -30,10 +34,19 @@ const updateBook = async (id: string, payload: Partial<TBooks>) => {
   });
   return result;
 };
+const deleteBook = async (id: string) => {
+  const isBooksExists = await Book.findById(id);
+  if (!isBooksExists) {
+    throw new AppError(httpStatus.NOT_FOUND, "Books not found");
+  }
+  const result = await Book.findByIdAndDelete(id);
+  return result;
+};
 
 export const BookService = {
   createBook,
   getAllBooks,
   getSingleBook,
   updateBook,
+  deleteBook,
 };
